@@ -1,0 +1,15 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install software
+      win_chocolatey:
+        name: '{{ item }}'
+        state: latest
+      with_items:
+      - notepadplusplus
+      - 7zip
+      - git
+      - putty
+      - python
+      - winscp
