@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: Download Avast AV Update
+      ansible.windows.win_get_url:
+        url: https://install.avcdn.net/vps18/vpsupd.exe
+        dest: C:\Users\RandomUser\earthrise.jpg
+
+    - name: Downloading Windows Defender Update
+      ansible.windows.win_get_url:
+        url: https://go.microsoft.com/fwlink/?LinkID=121721&arch=x64
+        dest: 
