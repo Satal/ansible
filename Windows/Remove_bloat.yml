@@ -51,3 +51,6 @@
       - "*Microsoft.MicrosoftStickyNotes*"
       - "*Microsoft.Windows.Photos*"
       - "*Microsoft.WindowsStore*"
+      - "*Microsoft.XboxGamingOverlay*"
+      - "*Microsoft.YourPhone*"
+      - "*Microsoft.Office.OneNote*"
