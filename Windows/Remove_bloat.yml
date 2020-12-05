@@ -54,3 +54,6 @@
       - "*Microsoft.XboxGamingOverlay*"
       - "*Microsoft.YourPhone*"
       - "*Microsoft.Office.OneNote*"
+      - "*Microsoft.MixedReality.Portal*"
+      - "*Microsoft.MSPaint*" # Actually Paint 3D
+      - "*Microsoft.ScreenSketch*"
