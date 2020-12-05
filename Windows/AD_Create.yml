@@ -1,6 +1,7 @@
 ---
+# https://github.com/madlabber/examples/blob/master/AD_create.yml
 - name: Create new Active-Directory Domain & Forest
-  hosts: localhost
+  hosts: AD
   vars:
     temp_address: 172.16.108.144
     dc_address: 172.16.108.11
