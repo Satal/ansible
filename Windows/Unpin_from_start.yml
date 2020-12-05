@@ -2,6 +2,18 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: Remove Packages
+    # - name: Remove Packages
+    #   win_shell: |
+    #     (New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | %{ $_.Verbs() } | ?{$_.Name -match 'Un.*pin from Start'} | %{$_.DoIt()}
+
+    - name: Unpin all apps
       win_shell: |
-        (New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | %{ $_.Verbs() } | ?{$_.Name -match 'Un.*pin from Start'} | %{$_.DoIt()}
+        foreach ($item in (New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items()) {
+          foreach ($verb in $item.Verbs()) {
+            Write-Host "Verb $($verb.Name) -- App $($item.Name)"
+            if ($verb.Name -match 'Van Start &losmaken|Van taa&kbalk losmaken') {
+              $verb.DoIt()
+              Write-Host "App $($item.Name) Verb $($verb.Name)"
+            }
+          }
+        }
