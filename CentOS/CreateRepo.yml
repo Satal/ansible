@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+    - name: Yum install necessary packages
+      yum: name={{item}} state=installed
+      with_items:
+         - "@nginx"
+         - yum-utils
+    - name: Create repo directory
+      file:
+        path: /data/repos
+        state: directory
+    
