@@ -30,6 +30,7 @@
           - ntp
           - python-pip
         state: present
+      become: yes
       notify:
         - restart realmd
 
