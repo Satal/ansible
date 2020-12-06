@@ -9,6 +9,7 @@
   become_method: sudo
   vars:
     domain_name: demo.lab
+    ou_to_join: OU=Linux,OU=Servers,DC=demo,DC=lab {{ domain_name }}
   vars_prompt:
     - name: "bind_password"
       prompt: "Password for administrator@{{ domain_name }}"
@@ -28,7 +29,7 @@
 
     - name: Join system to AD and add the computer object in the Linux OU
       expect:
-        command: /bin/bash -c "/usr/sbin/realm join --user=ADMINISTRATOR@{{ domain_name }} --computer-ou=OU=Linux,OU=Servers,DC=YALLALABS,DC=LOCAL {{ domain_name }}"
+        command: /bin/bash -c "/usr/sbin/realm join --user=ADMINISTRATOR@{{ domain_name }} --computer-ou={{ ou_to_join }}"
         responses:
           Password for *: "{{ bind_password }}"
 
