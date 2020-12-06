@@ -18,7 +18,17 @@
   tasks:
     - name: Install the required packages
       yum:
-        name: realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,ntpdate,ntp,python-pip
+        name:
+          - realmd
+          - sssd
+          - oddjob
+          - oddjob-mkhomedir
+          - adcli
+          - samba-common
+          - samba-common-tools
+          - ntpdate
+          - ntp
+          - python-pip
         state: present
       notify:
         - restart realmd
