@@ -3,8 +3,8 @@
   become: yes
   vars:
     nfsmounts:
-      - {  path: "/mnt/nfs_mount_1", src: "//fs01/nfsshare1" }
-      - {  path: "/mnt/nfs_mount_2", src: "//fs01/nfsshare2" }
+      - {  path: "/mnt/nfs_mount_1", src: "fs01:/nfsshare1" }
+      - {  path: "/mnt/nfs_mount_2", src: "fs01:/nfsshare2" }
   tasks:
       - name: mount the nfsshare in client side
         mount:
