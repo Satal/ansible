@@ -2,6 +2,8 @@
 - name: Install docker
   gather_facts: No
   hosts: all
+  become: yes
+  become_method: sudo
 
   tasks:
     - name: Install yum utils
