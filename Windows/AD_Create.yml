@@ -10,9 +10,9 @@
     dc_hostname: 'dc01'
     domain_name: 'demo.lab'
     local_admin: '.\administrator'
-    temp_password: 'P@ssw0rd1'
-    dc_password: 'P@ssw0rd'
-    recovery_password: 'P@ssw0rd'
+    temp_password: 'P@ssw0rd1*'
+    dc_password: 'P@ssw0rd1*'
+    recovery_password: 'P@ssw0rd1*'
     upstream_dns_1: 8.8.8.8
     upstream_dns_2: 8.8.4.4
     reverse_dns_zone: "172.16.108.0/24"
