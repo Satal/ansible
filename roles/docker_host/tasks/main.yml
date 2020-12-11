@@ -1,0 +1,49 @@
+---
+- name: Install docker
+  gather_facts: no
+  hosts: all
+
+  tasks:
+  - name: Uninstall Podman etc.
+    yum:
+      name: "{{ item }}"
+      state: absent
+    with_items:
+    - buildah 
+    - skopeo 
+    - podman 
+    - containers-common 
+    - atomic-registries
+    - docker
+  
+  - name: Install yum utils
+    yum:
+      name: yum-utils
+      state: latest
+  
+  - name: Install lvm2
+    yum:
+      name: lvm2
+      state: latest
+  
+  - name: Add Docker repo
+    yum_repository:
+
+    get_url:
+      description: repo for docker
+      name: docker-ce
+      baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+      gpgcheck: no
+
+  - name: Install Docker
+    package:
+      name: docker-ce
+      state: latest
+    become: yes
+
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    become: yes

@@ -1,0 +1,19 @@
+---
+- name: Ensure chrony is installed
+  package:
+    name: chrony
+    state: latest
+
+- name: Copy across enterprise chrony configuration
+  copy:
+    src: files/chrony.conf
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart the chrony service
+  service:
+    name: chronyd
+    state: restarted
+    enabled: yes

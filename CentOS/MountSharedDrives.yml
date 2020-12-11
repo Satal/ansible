@@ -16,3 +16,11 @@
           src: "{{item.src}}"
           path: "{{item.path}}"
         with_items: "{{nfsmounts}}"
+
+      - name: "mount share"
+        mount:
+          state: "mounted"
+          fstype: "cifs"
+          name: /mnt/win/
+          src: "//192.168.1.86/instshare"
+          opts: "credentials=/root/.smb_passwords,file_mode=0644,dir_mode=0755,gid=root,uid=root"

@@ -1,0 +1,5 @@
+---
+- name: Apply CentOS role
+  hosts: all
+  roles:
+    - linux_server
