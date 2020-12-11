@@ -34,11 +34,7 @@
     dest: /etc/nginx/conf.d/centos.conf
 
 - name: permissions for /data/repos
-  community.general.sefcontext:
-    target: '/data/repos(/.*)?'
-    setype: httpd_sys_content_t
-    state: present
-  #shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
+  shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
 
 - name: Restore SELinux Context
   shell: "restorecon -Rv /data/repos"
