@@ -13,5 +13,3 @@
   command: firewall-cmd --add-service=http --permanent
   notify:
     - restart firewalld
-
-- name: 
