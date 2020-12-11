@@ -7,9 +7,9 @@
   become_method: sudo
 
 - name: Copy across enterprise chrony configuration
-  copy:
-    src: files/chrony.conf
-    dest: /etc/chrony.conf
+  template:
+    src: "{{ ntp_config_file }}.j2"
+    dest: "/etc/{{ npt_config_file }}"
     owner: root
     group: root
     mode: '0644'
