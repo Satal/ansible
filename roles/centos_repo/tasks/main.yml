@@ -6,8 +6,11 @@
   with_items:
     - "@nginx"
     - yum-utils
-  notify:
-    - restart nginx
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
 
 - name: Add firewall rules
   command: firewall-cmd --add-service=http --permanent
