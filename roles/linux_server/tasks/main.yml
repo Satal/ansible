@@ -4,6 +4,7 @@
     name: chrony
     state: latest
   become: yes
+  become_method: sudo
 
 - name: Copy across enterprise chrony configuration
   copy:
