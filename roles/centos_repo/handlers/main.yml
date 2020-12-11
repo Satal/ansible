@@ -1,12 +1,12 @@
 ---
-- name: Restart nginx
+- name: restart nginx
   service:
     name: nginx
     state: restarted
     enabled: true
   become: true
 
-- name: Restart firewalld
+- name: restart firewalld
   service:
     name: firewalld
     state: restarted
