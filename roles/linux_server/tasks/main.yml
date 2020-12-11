@@ -19,3 +19,23 @@
     name: chronyd
     state: restarted
     enabled: yes
+
+- name: Join AD
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    "{{ domain_packages }}"
+
+- name: Install pexpect using pip
+  pip:
+    name: pexpect
+
+- name: discover realml
+  shell: /bin/bash -c "/usr/sbin/realm discover {{ realm_domain }}"
+
+- name: Join the active directory domain
+  expect:
+    command: /bin/bash -c "/usr/sbin/realm join {{ realm_domain }} --computer-ou={{ realm_ou }} --user={{ realm_join_user }}"
+    responses:
+      Password for *: "{{ realm_join_password }}"

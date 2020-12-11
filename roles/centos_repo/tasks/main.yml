@@ -1,0 +1,17 @@
+---
+- name: Install nginx
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "@nginx"
+    - yum-utils
+  notify:
+    - restart nginx
+
+- name: Add firewall rules
+  command: firewall-cmd --add-service=http --permanent
+  notify:
+    - restart firewalld
+
+- name: 

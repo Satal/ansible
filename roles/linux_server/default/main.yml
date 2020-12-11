@@ -25,3 +25,26 @@ ntp_restrict:
 ntp_cron_handler_enabled: false
 
 ntp_tinker_panic: false
+
+# Domain 
+
+join_domain: true
+
+realm_join_password: 
+realm_join_user: administrator@mylab.local
+realm_domain: mylab.local
+realm_ou: 
+
+domain_packages:
+- realmd
+- oddjob
+- oddjob-mkhomedir
+- sssd
+- samba-common
+- samba-common-tools
+- adcli
+- krb5-workstation
+- openldap-clients
+- policycoreutils-python
+- libsemanage
+- python-pip
