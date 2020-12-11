@@ -30,11 +30,9 @@
     src: files/nginx.conf
     dest: /etc/nginx/conf.d/centos.conf
 
-- name: Set SELinux rules
-  tasks:
-  - name: permissions for /data/repos
-    shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
+- name: permissions for /data/repos
+  shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
 
-  - name: Restore SELinux Context
-    shell: "restorecon -Rv /data/repos"
+- name: Restore SELinux Context
+  shell: "restorecon -Rv /data/repos"
 
