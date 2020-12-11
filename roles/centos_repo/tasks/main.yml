@@ -35,6 +35,7 @@
 
 - name: permissions for /data/repos
   shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
+  ignore_errors: yes
 
 - name: Restore SELinux Context
   shell: "restorecon -Rv /data/repos"
