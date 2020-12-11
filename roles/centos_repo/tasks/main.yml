@@ -13,3 +13,19 @@
   command: firewall-cmd --add-service=http --permanent
   notify:
     - restart firewalld
+
+- name: create repo directory
+  file:
+    path: /data/repos
+    state: directory
+
+- name: copy update-repo daily cron script
+  copy:
+    src: files/update-repo
+    dest: /etc/cron.daily/update-repo
+    mode: 755
+
+- name: copy nginx config
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/conf.d/centos.conf

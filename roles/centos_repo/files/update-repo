@@ -1,0 +1,8 @@
+#!/bin/bash
+VER='8'
+ARCH='x86_64'
+REPOS=(BaseOS AppStream extras)
+for REPO in ${REPOS[@]}
+do
+    reposync -p /data/repos/centos/${VER}/${ARCH}/os/ --repo=${REPO} --download-metadata --newest-only
+done
