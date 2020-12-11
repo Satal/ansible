@@ -3,6 +3,7 @@
   package:
     name: chrony
     state: latest
+  become: yes
 
 - name: Copy across enterprise chrony configuration
   copy:
