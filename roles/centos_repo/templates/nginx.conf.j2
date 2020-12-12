@@ -1,6 +1,6 @@
 server {
 	listen 80;
-	server_name localhost {{ repo_hostname }};
+	server_name localhost {{ repo_hostname }} {{ ansible_eth1.ipv4.address }};
         root /data/repos/;
        location / {
                 autoindex on;
