@@ -49,7 +49,11 @@
     state: link
 
 - name: Configure firewall
-  command: firewall-cmd --permanent --zone=trusted --change-interface=docker0
+  firewalld:
+    zone: trusted
+    interface: docker0
+    permanent: true
+    state: enabled
 
 - name: Set firewall to masquerade
   firewalld:
