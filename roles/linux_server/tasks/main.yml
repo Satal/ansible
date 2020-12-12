@@ -20,6 +20,15 @@
     state: restarted
     enabled: yes
 
+## Add IPs to host file
+- name: Add IPs to host file
+  lineinfile:
+    dest: /etc/hosts
+    regexp: ".*{{ item }}$"
+    line: "{{ item.ip }} {{ item }}"
+    state: present
+  with_items: "{{ hosts }}"
+
 ## Connect to local repo
 
 - name: Create folder for old repo files

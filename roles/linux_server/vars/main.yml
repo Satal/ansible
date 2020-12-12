@@ -22,6 +22,11 @@ ntp_cron_handler_enabled: false
 
 ntp_tinker_panic: false
 
+# Hosts configuration
+hosts:
+  - name: jmrepo01
+    ip: 192.168.179.130
+
 # CentOS Local Repo
 repo_hostname: 'jmrepo01'
 
