@@ -47,3 +47,28 @@
       state: started
       enabled: yes
     become: yes
+
+  - name: Figure out latest Docker Compose file from latest tag
+    get_url:
+      url: "https://api.github.com/repos/docker/compose/releases/latest"
+      force: yes
+      headers:
+        Accept: "application/vnd.github.v3+json"
+      dest: "/tmp/docker-compose.json"
+
+  - name: Get download url 
+    shell: |
+      cat "/tmp/docker-compose.json" | jq '.assets | .[] | select(.browser_download_url | contains("docker-compose-Linux-x86_64\"")) | .url' | sed -e 's/^"//' -e 's/"$//'
+    register: "download_url"
+
+  - debug:
+      msg: "{{ download_url.stdout }}"
+
+  - name: Download latest release
+    get_url:
+      url: "{{ download_url.stdout }}"
+      dest: /usr/local/bin/docker-compose
+      tmp_dest: /tmp/
+      force: yes
+      headers:
+        Accept: "application/octet-stream"
