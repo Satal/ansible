@@ -39,3 +39,7 @@
 
 - name: Restore SELinux Context
   shell: "restorecon -Rv /data/repos"
+
+- name: Set repo hostname
+  hostname:
+    name: "{{ repo_hostname }}"
