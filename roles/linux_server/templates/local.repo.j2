@@ -1,0 +1,48 @@
+[BaseOS]
+name=CentOS-$releasever - Base
+baseurl=//{{ repo_hostname }}/centos/$releasever/BaseOS/$basearch/os/
+gpgcheck=1
+enabled=1
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[AppStream]
+name=CentOS-$releasever - AppStream
+baseurl=//{{ repo_hostname }}/centos/$releasever/AppStream/$basearch/os/
+gpgcheck=1
+enabled=1
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[centosplus]
+name=CentOS-$releasever - Plus
+baseurl=//{{ repo_hostname }}/centos/$releasever/centosplus/$basearch/os/
+gpgcheck=1
+enabled=0
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=//{{ repo_hostname }}/centos/$releasever/extras/$basearch/os/
+gpgcheck=1
+enabled=1
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[PowerTools]
+name=CentOS-$releasever - PowerTools
+baseurl=//{{ repo_hostname }}/centos/$releasever/PowerTools/$basearch/os/
+gpgcheck=1
+enabled=0
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[cr]
+name=CentOS-$releasever - cr
+baseurl=//{{ repo_hostname }}/centos/$releasever/cr/$basearch/os/
+gpgcheck=1
+enabled=0
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[fasttrack]
+name=CentOS-$releasever - fasttrack
+baseurl=//{{ repo_hostname }}/centos/$releasever/fasttrack/$basearch/os/
+gpgcheck=1
+enabled=0
+gpgkey=//{{ repo_hostname }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official

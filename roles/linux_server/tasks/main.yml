@@ -20,22 +20,37 @@
     state: restarted
     enabled: yes
 
-- name: Join AD
-  yum:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    "{{ domain_packages }}"
+## Connect to local repo
 
-- name: Install pexpect using pip
-  pip:
-    name: pexpect
+- name: Create folder for old repo files
+  file:
+    path: /etc/yum.repos.d/old_repos
+    state: directory
 
-- name: discover realml
-  shell: /bin/bash -c "/usr/sbin/realm discover {{ realm_domain }}"
+- name: Move old repo files
+  shell: mv /etc/yum.repos.d/C*.repo /etc/yum.repos.d/old_repos/
 
-- name: Join the active directory domain
-  expect:
-    command: /bin/bash -c "/usr/sbin/realm join {{ realm_domain }} --computer-ou={{ realm_ou }} --user={{ realm_join_user }}"
-    responses:
-      Password for *: "{{ realm_join_password }}"
+- name: Configure local CentOS Repo
+  template:
+    src: local.repo.j2
+    dest: /etc/yum.repos.d/local.repo
+
+# - name: Install packages required for domain joining
+#   yum:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#     "{{ domain_packages }}"
+
+# - name: Install pexpect using pip
+#   pip:
+#     name: pexpect
+
+# - name: discover realml
+#   shell: /bin/bash -c "/usr/sbin/realm discover {{ realm_domain }}"
+
+# - name: Join the active directory domain
+#   expect:
+#     command: /bin/bash -c "/usr/sbin/realm join {{ realm_domain }} --computer-ou={{ realm_ou }} --user={{ realm_join_user }}"
+#     responses:
+#       Password for *: "{{ realm_join_password }}"
