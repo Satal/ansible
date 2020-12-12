@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - linux_server
+  become: yes
