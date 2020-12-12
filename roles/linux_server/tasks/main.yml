@@ -2,7 +2,7 @@
 - name: Ensure chrony is installed
   package:
     name: chrony
-    state: latest
+    state: present
   become: yes
   become_method: sudo
 
