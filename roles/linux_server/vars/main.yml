@@ -22,6 +22,9 @@ ntp_cron_handler_enabled: false
 
 ntp_tinker_panic: false
 
+# CentOS Local Repo
+repo_hostname: 'jmrepo01'
+
 # Domain 
 
 join_domain: true
