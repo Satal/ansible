@@ -66,3 +66,9 @@
   systemd:
     name: firewalld
     state: reloaded
+
+- name: Add user to docker group
+  user:
+    name: admin
+    groups: docker
+    append: yes
