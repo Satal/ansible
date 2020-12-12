@@ -28,7 +28,8 @@
     state: directory
 
 - name: Move old repo files
-  shell: mv /etc/yum.repos.d/C*.repo /etc/yum.repos.d/old_repos/
+  shell: mv /etc/yum.repos.d/C*.repo /etc/yum.repos.d/old_repos/ -f
+  ignore_errors: yes
 
 - name: Configure local CentOS Repo
   template:
