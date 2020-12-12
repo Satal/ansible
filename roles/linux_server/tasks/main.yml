@@ -8,8 +8,8 @@
 
 - name: Copy across enterprise chrony configuration
   template:
-    src: "{{ ntp_config_file }}.j2"
-    dest: "/etc/{{ npt_config_file }}"
+    src: "chrony.conf.j2"
+    dest: "/etc/chrony.conf"
     owner: root
     group: root
     mode: '0644'

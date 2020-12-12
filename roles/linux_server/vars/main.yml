@@ -1,1 +1,46 @@
 ---
+
+# NTP Configuration
+
+ntp_enabled: true
+ntp_timezone: Etc/UTC
+
+# NTP server area configuration (leave empty for 'Worldwide').
+# See: http://support.ntp.org/bin/view/Servers/NTPPoolServers
+ntp_area: 'uk'
+ntp_servers:
+  - "0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
+  - "1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
+  - "2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
+  - "3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
+
+ntp_restrict:
+  - "127.0.0.1"
+  - "::1"
+
+ntp_cron_handler_enabled: false
+
+ntp_tinker_panic: false
+
+# Domain 
+
+join_domain: true
+
+realm_join_password: 
+realm_join_user: administrator@mylab.local
+realm_domain: mylab.local
+realm_ou: 
+
+domain_packages:
+- realmd
+- oddjob
+- oddjob-mkhomedir
+- sssd
+- samba-common
+- samba-common-tools
+- adcli
+- krb5-workstation
+- openldap-clients
+- policycoreutils-python
+- libsemanage
+- python-pip
