@@ -25,12 +25,12 @@ ntp_tinker_panic: false
 # Hosts configuration
 hosts:
   - name: jmrepo01
-    ip: 192.168.179.130
+    ip: 192.168.179.138
 
 # CentOS Local Repo
 centos_repo:
   hostname: 'jmrepo01'
-  ip: 192.168.179.130
+  ip: 192.168.179.138
 
 # Domain 
 
