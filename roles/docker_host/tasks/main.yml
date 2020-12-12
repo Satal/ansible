@@ -1,15 +1,8 @@
 ---
 - name: Uninstall Podman etc.
   yum:
-    name: "{{ item }}"
+    name: ['buildah', 'skopeo', 'podman', 'containers-common', 'atomic-registries', 'docker']
     state: absent
-  with_items:
-  - buildah 
-  - skopeo 
-  - podman 
-  - containers-common 
-  - atomic-registries
-  - docker
 
 - name: Install yum utils
   yum:
