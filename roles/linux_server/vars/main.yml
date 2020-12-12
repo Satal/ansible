@@ -29,8 +29,8 @@ hosts:
 
 # CentOS Local Repo
 centos_repo:
-  - hostname: 'jmrepo01'
-    ip: 192.168.179.130
+  hostname: 'jmrepo01'
+  ip: 192.168.179.130
 
 # Domain 
 
