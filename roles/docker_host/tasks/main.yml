@@ -35,8 +35,9 @@
 - name: Download latest Docker Compose
   get_url:
     url: "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64"
-    dest: /home/admin/docker-compose
+    dest: /usr/local/bin/docker-compose
     tmp_dest: /tmp/
     force: yes
     headers:
       Accept: "application/octet-stream"
+    mode: 751
