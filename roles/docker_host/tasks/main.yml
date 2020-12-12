@@ -40,4 +40,4 @@
     force: yes
     headers:
       Accept: "application/octet-stream"
-    mode: 751
+    mode: a+x
