@@ -1,48 +1,48 @@
 [BaseOS]
 name=CentOS-$releasever - Base
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/BaseOS/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/BaseOS/
 gpgcheck=1
 enabled=1
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [AppStream]
 name=CentOS-$releasever - AppStream
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/AppStream/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/AppStream/
 gpgcheck=1
 enabled=1
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [centosplus]
 name=CentOS-$releasever - Plus
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/centosplus/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/centosplus/
 gpgcheck=1
 enabled=0
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [extras]
 name=CentOS-$releasever - Extras
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/extras/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/extras/
 gpgcheck=1
 enabled=1
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [PowerTools]
 name=CentOS-$releasever - PowerTools
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/PowerTools/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/PowerTools/
 gpgcheck=1
 enabled=0
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [cr]
 name=CentOS-$releasever - cr
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/cr/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/cr/
 gpgcheck=1
 enabled=0
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
 
 [fasttrack]
 name=CentOS-$releasever - fasttrack
-baseurl=//{{ centos_repo.ip }}/centos/$releasever/fasttrack/
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/fasttrack/
 gpgcheck=1
 enabled=0
-gpgkey=//{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
