@@ -1,0 +1,6 @@
+---
+- name: Apply Conky bg
+  hosts: all
+  roles:
+    - conky_bg
+  become: yes
