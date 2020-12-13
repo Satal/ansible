@@ -1,1 +1,14 @@
 ---
+
+- name: Make directory for docker registry
+  file:
+    path: /var/docker-registry
+    state: directory
+
+- name: Put docker-compose in docker registry
+  template:
+    src: docker-compose.yml.j2
+    dest: /var/docker-registry/docker-compose.yml
+
+- name: Run docker-compose
+  shell: docker-compose up -d
