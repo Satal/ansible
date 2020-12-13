@@ -13,4 +13,4 @@
   # this task tests to see if the output
   - name: Is SELinux Enabled?
     debug: msg="selinux is enabled {{ sestatus.stdout }}"
-    when: '"Enabled" not in sestatus.stdout'
+    when: '"Enforcing" not in sestatus.stdout'
