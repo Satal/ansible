@@ -1,6 +1,10 @@
 ---
 
-- name: Install Icinga2 rpm
-  dnf:
-    name: https://packages.icinga.com/epel/icinga-rpm-release-8-latest.noarch.rpm
-    state: present
+- name: Enable CentOS8 PowerTools repo
+  # NB: doesn't run command  `dnf config-manager --set-enabled PowerTools` as can't make that idempotent
+  lineinfile: 
+    path: /etc/yum.repos.d/CentOS-PowerTools.repo
+    create: false # so raise error if not already installed
+    regexp: enabled=
+    line: enabled=1
+  when: ansible_distribution_major_version == "8"
