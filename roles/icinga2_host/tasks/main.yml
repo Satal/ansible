@@ -1,0 +1,6 @@
+---
+
+- name: Install Icinga2 rpm
+  dnf:
+    name: https://packages.icinga.com/epel/icinga-rpm-release-8-latest.noarch.rpm
+    state: present
