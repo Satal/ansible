@@ -1,3 +1,5 @@
 ---
 dns_name: mylab.local
 safe_mode_password: Password123
+dc_address: 192.168.3.135
+dc_hostname: dc01
