@@ -1,7 +1,7 @@
 ---
 dns_name: mylab.local
 safe_mode_password: Password123
-dc_address: 192.168.3.135
-dc_hostname: dc01
-reverse_dns_zone: "172.16.108.0/24"
-ntp_servers: "0.us.pool.ntp.org,1.us.pool.ntp.org,2.us.pool.ntp.org,3.us.pool.ntp.org"
+dc_address: 10.0.0.245
+dc_hostname: JMDC01
+reverse_dns_zone: "10.0.0.0/24"
+ntp_servers: "0.uk.pool.ntp.org,1.uk.pool.ntp.org,2.uk.pool.ntp.org,3.uk.pool.ntp.org"
