@@ -4,6 +4,10 @@
     name: '{{ dc_hostname }}'
   register: res
 
+- name: Set static IP address
+  win_shell: "(new-netipaddress -InterfaceAlias Ethernet0 -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
+  ignore_errors: True 
+
 - name: Reboot
   win_reboot:
   when: res.reboot_required   
@@ -21,6 +25,15 @@
     name: w32time
     state: started
 
+- name: Disable firewall for Domain, Public and Private profiles
+  win_firewall:
+    state: disabled
+    profiles:
+    - Domain
+    - Private
+    - Public
+  tags: disable_firewall
+
 - name: install ad
   win_feature: >
       name=AD-Domain-Services
@@ -29,7 +42,7 @@
       state=present
   register: result
 
-- name: install domain
+- name: Create domain
   win_domain: >
     dns_domain_name='{{ dns_name }}'
     safe_mode_password='{{ safe_mode_password }}'
