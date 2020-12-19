@@ -33,6 +33,12 @@
   win_domain: >
     dns_domain_name='{{ dns_name }}'
     safe_mode_password='{{ safe_mode_password }}'
+    create_dns_delegation: no
+    database_path: C:\Windows\NTDS
+    domain_mode: WinThreshold
+    domain_netbios_name: "{{ dns_name.split('.')[0] | lower }}"
+    forest_mode: WinThreshold
+    sysvol_path: C:\Windows\SYSVOL
   register: ad
 
 - name: reboot server
