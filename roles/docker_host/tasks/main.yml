@@ -54,13 +54,6 @@
     state: link
   when: docker_compose.stat.exists == false
 
-- name: Configure firewall
-  firewalld:
-    zone: trusted
-    interface: docker0
-    permanent: true
-    state: enabled
-
 - name: Set firewall to masquerade
   firewalld:
     masquerade: yes
