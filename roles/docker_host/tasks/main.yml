@@ -71,3 +71,6 @@
     name: admin
     groups: docker
     append: yes
+
+- name: Refresh user permissions
+  shell: su - $USER
