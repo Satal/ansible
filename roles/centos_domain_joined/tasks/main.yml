@@ -13,7 +13,7 @@
     - adcli
     - krb5-workstation
     - openldap-clients
-    - policycoreutils-python
+    #- policycoreutils-python
 
 - name: Fail if default hostname
   shell: echo $HOSTNAME
