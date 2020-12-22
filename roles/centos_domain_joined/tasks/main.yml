@@ -1,17 +1,27 @@
----  
-- name: Install realmd packages
+--- 
+- name: Ensure epel repo present
   yum:
-    name: sssd,adcli,samba-common-tools,oddjob,oddjob-mkhomedir,realmd
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     state: present
 
-- name: Check if machine is bound
-  shell: /bin/bash -c "realm list | grep sssd"
-  register: realmd_bound
-  changed_when: false
-  ignore_errors: true
+- name: Install realmd packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - realmd
+    - oddjob
+    - oddjob-mkhomedir
+    - sssd
+    - samba-common
+    - samba-common-tools
+    - adcli
+    - krb5-workstation
+    - openldap-clients
+    - policycoreutils-python
 
 - name: Join the domain
-  shell: echo '{{ realm_join_password }}' | realm join --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local" --user={{ realm_join_user }} {{ realm_domain }}
+  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }} #--computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
   register: command_result
   ignore_errors: True
   notify:
