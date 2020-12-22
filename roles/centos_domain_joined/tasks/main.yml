@@ -1,9 +1,4 @@
 --- 
-- name: Ensure epel repo present
-  yum:
-    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    state: present
-
 - name: Install realmd packages
   yum:
     name: "{{ item }}"
@@ -20,8 +15,11 @@
     - openldap-clients
     - policycoreutils-python
 
+- name: Fail if default hostname
+  failed_when: "'localhost.localdomain' in inventory_hostname"
+
 - name: Join the domain
-  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }} #--computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
+  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
   register: command_result
   ignore_errors: True
   notify:
