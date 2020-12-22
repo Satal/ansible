@@ -72,5 +72,5 @@
     groups: docker
     append: yes
 
-- name: Refresh user permissions
-  shell: su - $USER
+- name: Rebooting server to reload user permissions (excessive, I know)
+  reboot:
