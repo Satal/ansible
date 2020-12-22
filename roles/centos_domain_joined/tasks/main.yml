@@ -16,6 +16,8 @@
     - policycoreutils-python
 
 - name: Fail if default hostname
+  shell: echo $HOSTNAME
+  register: result
   failed_when: "'localhost.localdomain' in inventory_hostname"
 
 - name: Join the domain
