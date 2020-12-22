@@ -28,7 +28,6 @@
 - name: Join the domain
   shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
   register: command_result
-  ignore_errors: True
   notify:
     - Restart sssd
 
@@ -36,3 +35,12 @@
   fail: 
     msg: "Realm join failed with this error: {{ command_result.stderr }}"
   when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
+
+- name: replace line
+  lineinfile: 
+    path: /etc/sssd/sssd.conf 
+    regexp: '^(.*)use_fully_qualified_names = True(.*)$' 
+    line: 'use_fully_qualified_names = False'
+    backrefs: yes
+  notify:
+    - Restart sssd
