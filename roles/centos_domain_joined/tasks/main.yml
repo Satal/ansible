@@ -31,17 +31,16 @@
 
 - name: Join domain if necessary
   block:
+    - name: Join the domain
+      shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
+      register: command_result
+      notify:
+        - Restart sssd
 
-  - name: Join the domain
-    shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
-    register: command_result
-    notify:
-      - Restart sssd
-
-  - name: Fail the play when the realm join fails
-    fail: 
-      msg: "Realm join failed with this error: {{ command_result.stderr }}"
-    when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
+    - name: Fail the play when the realm join fails
+      fail: 
+        msg: "Realm join failed with this error: {{ command_result.stderr }}"
+      when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
   
   when: ad_status.rc != 0
 
