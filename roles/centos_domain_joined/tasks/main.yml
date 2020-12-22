@@ -17,7 +17,7 @@
 # - name: Fail if default hostname
 #   fail: 
 #     msg: "Realm join failed with this error: {{ command_result.stderr }}"
-#   when: inventory_hostname = "localhost.localdomain"
+#   when: inventory_hostname == "localhost.localdomain"
 
 - name: Add DC to hosts file
   lineinfile:
@@ -27,7 +27,7 @@
 - name: Checking to see if system is already joined to AD
   command: /bin/bash -c "/usr/sbin/realm list"
   register: realm_list_results
-  tags: [ 'AD' ]
+
 
 - name: Join domain if necessary
   block:
@@ -42,7 +42,7 @@
         msg: "Realm join failed with this error: {{ command_result.stderr }}"
       when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
   
-  when: ad_status.rc != 0
+  when: realm_list_results.stdout == ""
 
 - name: Don't require users to provide fully qualified names
   lineinfile: 
