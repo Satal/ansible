@@ -24,11 +24,10 @@
     path: /etc/hosts
     line: '{{ realm_dc_ip }} {{ realm_dc_name }}'
 
-- name: Verify | Checking Domain Join status
-  command: id {{ realm_join_user }}
-  register: ad_status
-  changed_when: false
-  ignore_errors: true
+- name: Checking to see if system is already joined to AD
+  command: /bin/bash -c "/usr/sbin/realm list"
+  register: realm_list_results
+  tags: [ 'AD' ]
 
 - name: Join domain if necessary
   block:
@@ -44,8 +43,7 @@
       msg: "Realm join failed with this error: {{ command_result.stderr }}"
     when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
   
-  when:
-    when: ad_status.rc != 0
+  when: ad_status.rc != 0
 
 - name: Don't require users to provide fully qualified names
   lineinfile: 
