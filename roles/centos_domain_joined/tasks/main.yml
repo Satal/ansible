@@ -58,3 +58,6 @@
     dest: /etc/sudoers
     line: '%{{realm_sudoers_group}}        ALL=(ALL)       ALL'
     insertafter: '^%wheel'
+
+- name: Permissions | Allow LinuxUsers AD group to log onto the system
+  command: /bin/bash -c "realm permit -g '{{ realm_permit_group }}'"

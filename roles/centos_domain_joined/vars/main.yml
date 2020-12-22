@@ -5,3 +5,4 @@ realm_domain: mylab.local
 realm_dc_ip: 10.0.0.245
 realm_dc_name: jmdc01.mylab.local
 realm_sudoers_group: Sudoers@mylab.local
+realm_permit_group: LinuxUsers@mylab.local
