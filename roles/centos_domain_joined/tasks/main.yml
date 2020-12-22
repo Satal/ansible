@@ -26,7 +26,7 @@
 
 
 - name: Join the domain
-  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
+  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
   register: command_result
   ignore_errors: True
   notify:
