@@ -1,20 +1,18 @@
 ---  
 - name: Install realmd packages
   yum:
-    name: "{{ item }}"
+    name: libselinux-python,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,ntpdate,ntp,python-pip,sudo
     state: present
-  loop:
-    - realmd
-    - oddjob
-    - oddjob-mkhomedir
-    - sssd
-    - samba-common
-    - samba-common-tools
-    - adcli
-    - krb5-workstation
-    - openldap-clients
-    - policycoreutils-python
 
+- name: Install pexpect using pip
+  pip:
+    name: pexpect
+
+- name: Check if machine is bound
+  shell: /bin/bash -c "realm list | grep sssd"
+  register: realmd_bound
+  changed_when: false
+  ignore_errors: true
 
 - name: Join the domain
   shell: echo '{{ realm_join_password }}' | realm join --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local" --user={{ realm_join_user }} {{ realm_domain }}
