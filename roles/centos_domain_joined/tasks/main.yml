@@ -24,19 +24,30 @@
     path: /etc/hosts
     line: '{{ realm_dc_ip }} {{ realm_dc_name }}'
 
+- name: Verify | Checking Domain Join status
+  command: id {{ realm_join_user }}
+  register: ad_status
+  changed_when: false
+  ignore_errors: true
 
-- name: Join the domain
-  shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
-  register: command_result
-  notify:
-    - Restart sssd
+- name: Join domain if necessary
+  block:
 
-- name: Fail the play when the realm join fails
-  fail: 
-    msg: "Realm join failed with this error: {{ command_result.stderr }}"
-  when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
+  - name: Join the domain
+    shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_dc_name }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
+    register: command_result
+    notify:
+      - Restart sssd
 
-- name: replace line
+  - name: Fail the play when the realm join fails
+    fail: 
+      msg: "Realm join failed with this error: {{ command_result.stderr }}"
+    when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
+  
+  when:
+    when: ad_status.rc != 0
+
+- name: Don't require users to provide fully qualified names
   lineinfile: 
     path: /etc/sssd/sssd.conf 
     regexp: '^(.*)use_fully_qualified_names = True(.*)$' 
@@ -44,3 +55,6 @@
     backrefs: yes
   notify:
     - Restart sssd
+
+- name: Allow the Sudoers AD group to logon to the system
+  command: /bin/bash -c "/usr/sbin/realm permit -g {{realm_sudoers_group}}"
