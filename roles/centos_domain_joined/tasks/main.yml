@@ -4,10 +4,6 @@
     name: sssd,adcli,samba-common-tools,oddjob,oddjob-mkhomedir,realmd
     state: present
 
-- name: Install pexpect using pip
-  pip:
-    name: pexpect
-
 - name: Check if machine is bound
   shell: /bin/bash -c "realm list | grep sssd"
   register: realmd_bound
