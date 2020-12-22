@@ -17,7 +17,7 @@
 - name: Fail if default hostname
   fail: 
     msg: "Realm join failed with this error: {{ command_result.stderr }}"
-  when: "'localhost.localdomain' in {{inventory_hostname}}"
+  when: inventory_hostname = "localhost.localdomain"
 
 - name: Add DC to hosts file
   lineinfile:
