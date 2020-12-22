@@ -53,5 +53,8 @@
   notify:
     - Restart sssd
 
-- name: Allow the Sudoers AD group to logon to the system
-  command: /bin/bash -c "/usr/sbin/realm permit -g {{realm_sudoers_group}}"
+- name: Add the Sudoers AD Group to sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    line: '%{{realm_sudoers_group}}        ALL=(ALL)       ALL'
+    insertafter: '^%wheel'
