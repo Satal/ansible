@@ -1,7 +1,7 @@
 ---  
 - name: Install realmd packages
   yum:
-    name: libselinux-python,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,ntpdate,ntp,python-pip,sudo
+    name: sssd,adcli,samba-common-tools,oddjob,oddjob-mkhomedir,realmd
     state: present
 
 - name: Install pexpect using pip
