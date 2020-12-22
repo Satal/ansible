@@ -1,0 +1,5 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - centos_domain_joined
