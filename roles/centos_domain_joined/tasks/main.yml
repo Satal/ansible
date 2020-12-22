@@ -13,12 +13,11 @@
     - adcli
     - krb5-workstation
     - openldap-clients
-    #- policycoreutils-python
 
 - name: Fail if default hostname
-  shell: echo $HOSTNAME
-  register: result
-  failed_when: "'localhost.localdomain' in inventory_hostname"
+  fail: 
+    msg: "Realm join failed with this error: {{ command_result.stderr }}"
+  when: "'localhost.localdomain' in {{inventory_hostname}}"
 
 - name: Add DC to hosts file
   lineinfile:
