@@ -20,6 +20,12 @@
   register: result
   failed_when: "'localhost.localdomain' in inventory_hostname"
 
+- name: Add DC to hosts file
+  lineinfile:
+    path: /etc/hosts
+    line: '{{ realm_dc_ip }} {{ realm_dc_name }}'
+
+
 - name: Join the domain
   shell: echo '{{ realm_join_password }}' | realm join --user={{ realm_join_user }} {{ realm_domain }} --computer-ou="ou=Linux,ou=Servers,dc=mylab,dc=local"
   register: command_result
