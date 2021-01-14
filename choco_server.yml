@@ -1,0 +1,6 @@
+---
+- name: Configure Package Management Server
+  hosts: all
+  become: true
+  roles:
+    - chocolatey_server

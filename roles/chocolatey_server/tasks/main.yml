@@ -1,0 +1,92 @@
+---
+
+#https://www.frostbyte.us/using-ansible-to-install-a-chocolatey-package-repository/
+- name: Ensure IIS is installed
+  win_feature:
+    name: Web-Server
+    state: present
+    include_management_tools: True
+
+- name: Ensure IIS Web-Server and ASP.NET are installed
+  win_feature:
+    name: ""
+    state: present
+  with_items:
+    - Web-Server
+    - Web-Asp-Net45
+    - Web-AppInit
+
+- name: Ensure Powershell xWebAdministration module is available
+  win_psmodule:
+    name: xWebAdministration
+    state: present
+
+- name: Ensure Default Web Site is not present
+  win_dsc:
+    resource_name: xWebsite
+    Name: Default Web Site
+    Ensure: Absent
+
+- name: Chocolatey.server package is installed
+  win_chocolatey:
+    name: "chocolatey.server"
+    state: present
+
+- name: Configure AppPool for Chocolatey.server
+  win_dsc:
+    resource_name: xWebAppPool
+    Name: ChocolateyServer
+    Ensure: present
+    enable32BitAppOnWin64: true
+    managedRuntimeVersion: v4.0
+    startMode: AlwaysRunning
+    autoStart: true
+    State: started
+
+- name: Grant read permissions to c:\tools\chocolatey.server
+  win_acl:
+    user: ""
+    path: c:\tools\chocolatey.server
+    rights: Read
+    state: present
+    type: allow
+    inherit: ContainerInherit, ObjectInherit
+    progagation: InheritOnly
+  with_items:
+    - IIS_IUSRS
+    - IUSR
+    - IIS APPPOOL\ChocolateyServer
+
+- name: Grant IIS APPPOOL\ modify permissions to c:\tools\chocolatey.server\App_Data
+  win_acl:
+    user: ""
+    path: c:\tools\chocolatey.server
+    rights: Modify
+    state: present
+    type: allow
+    inherit: ContainerInherit, ObjectInherit
+    progagation: InheritOnly
+  with_items:
+    - IIS_IUSRS
+    - IIS APPPOOL\ChocolateyServer
+
+- name: Windows | Add Website for Chocolatey.server
+  win_dsc:
+    resource_name: xWebsite
+    Name: ChocolateyServer
+    Ensure: present
+    BindingInfo:
+      Protocol: http
+      Port: 80
+    ApplicationPool: ChocolateyServer
+    PreloadEnabled: true
+    ServiceAutoStartEnabled: true
+    AuthenticationInfo:
+      Anonymous: true
+    PhysicalPath: c:\tools\chocolatey.server
+
+- name: Set API-Key
+  win_lineinfile:
+    path: c:\tools\chocolatey.server\web.confi
+    regexp: 'add key="apiKey"'
+    line: ''
