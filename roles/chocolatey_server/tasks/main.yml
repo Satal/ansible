@@ -87,6 +87,6 @@
 
 - name: Set API-Key
   win_lineinfile:
-    path: c:\tools\chocolatey.server\web.confi
+    path: c:\tools\chocolatey.server\web.config
     regexp: 'add key="apiKey"'
-    line: ''
+    line: '<add key="apiKey" value="{{chocolatey_server_api}}" />'
