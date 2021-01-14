@@ -9,7 +9,7 @@
 
 - name: Ensure IIS Web-Server and ASP.NET are installed
   win_feature:
-    name: ""
+    name: "{{ item }}"
     state: present
   with_items:
     - Web-Server
@@ -45,7 +45,7 @@
 
 - name: Grant read permissions to c:\tools\chocolatey.server
   win_acl:
-    user: ""
+    user: "{{ item }}"
     path: c:\tools\chocolatey.server
     rights: Read
     state: present
@@ -59,7 +59,7 @@
 
 - name: Grant IIS APPPOOL\ modify permissions to c:\tools\chocolatey.server\App_Data
   win_acl:
-    user: ""
+    user: "{{ item }}"
     path: c:\tools\chocolatey.server
     rights: Modify
     state: present
