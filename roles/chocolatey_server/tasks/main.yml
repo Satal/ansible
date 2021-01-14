@@ -76,8 +76,8 @@
     Name: ChocolateyServer
     Ensure: present
     BindingInfo:
-      Protocol: http
-      Port: 80
+      - Protocol: http
+        Port: 80
     ApplicationPool: ChocolateyServer
     PreloadEnabled: true
     ServiceAutoStartEnabled: true
