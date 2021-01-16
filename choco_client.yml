@@ -1,10 +1,4 @@
 ---
-- name: Ensure Chocolatey installed from internal repo
-  win_chocolatey:
-    name: chocolatey
-    state: present
-    source: "{{choco_install_script_url}}"
-
 - name: Configure Package Management Server
   hosts: all
   roles:
