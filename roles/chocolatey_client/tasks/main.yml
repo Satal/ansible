@@ -1,4 +1,9 @@
 ---
+- name: Create C:\temp
+  file:
+    path: C:\temp
+    state: directory
+
 - name: Save InstallChocolatey.ps1 file
   template:
     src: InstallChocolatey.ps1.j2
