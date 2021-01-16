@@ -22,8 +22,3 @@
     name: internal_repo
     state: present
     source: "{{choco_repo_location}}"
-
-- name: Disable Chocolatey source
-  win_chocolatey_source:
-    name: chocolatey
-    state: disabled
