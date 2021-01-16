@@ -2,4 +2,4 @@
 - hosts: all
   become: true
   roles:
-    - icinga2_host
+    - nexus_repo
