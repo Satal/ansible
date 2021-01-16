@@ -1,1 +1,3 @@
 ---
+choco_repo_location: http://10.0.0.232/chocolatey
+choco_install_script_url: http://script/url/from/generic/tab/ChocolateyInstall.ps1
