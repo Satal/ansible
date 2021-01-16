@@ -18,4 +18,5 @@
     volumes:
       - nexus_data:/nexus-data
     ports:
-        - '8081:8081'
+      - '8081:8081'
+    restart_policy: always
