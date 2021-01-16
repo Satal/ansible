@@ -1,18 +1,27 @@
 ---
-- name: Create C:\temp
-  win_file:
-    path: C:\temp
-    state: directory
+- name: Check if C:\ProgramData\chocolatey exists
+  stat:
+    path: C:\ProgramData\chocolatey
+  register: file_details
 
-- name: Save InstallChocolatey.ps1 file
-  template:
-    src: InstallChocolatey.ps1.j2
-    dest: c:\temp\InstallChocolatey.ps1
+- name: Install Chocolatey
+  block: 
+    - name: Create C:\temp
+      win_file:
+        path: C:\temp
+        state: directory
 
-- name: Run InstallChocolatey.ps1
-  win_shell: C:\temp\InstallChocolatey.ps1
-  args:
-    creates: C:\ProgramData\chocolatey
+    - name: Save InstallChocolatey.ps1 file
+      template:
+        src: InstallChocolatey.ps1.j2
+        dest: c:\temp\InstallChocolatey.ps1
+
+    - name: Run InstallChocolatey.ps1
+      win_shell: C:\temp\InstallChocolatey.ps1
+      args:
+        creates: C:\ProgramData\chocolatey
+  ## When C:\ProgramData\chocolatey doesn't exist
+  when: file_details.stat.exists == false
 
 - name: Remove the default public source
   win_chocolatey_source:

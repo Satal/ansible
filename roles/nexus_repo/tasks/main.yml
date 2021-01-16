@@ -1,5 +1,14 @@
 ---
 
+- name: Install python
+  package:
+    - name: python3
+      state: latest
+
+- name: Install docker-compose
+  pip:
+    name: docker-compose
+
 - name: Create persistent storage
   file:
     path: /data/nexus-data
