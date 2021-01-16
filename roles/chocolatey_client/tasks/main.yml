@@ -6,17 +6,9 @@
 
 - name: Add new internal source
   win_chocolatey_source:
-    name: internal repo
+    name: internal_repo
     state: present
-    source: http://10.0.0.232/chocolatey
-
-- name: Create HTTP source with credentials
-  win_chocolatey_source:
-    name: internal repo
-    state: present
-    source: https://10.0.0.232/chocolatey
-    source_username: choco
-    source_password: rock
+    source: "{{choco_repo_location}}"
 
 - name: Disable Chocolatey source
   win_chocolatey_source:
