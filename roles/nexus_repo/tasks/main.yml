@@ -6,7 +6,16 @@
     state: directory
     owner: 200
 
-- name: Save docker-compose file
-  copy:
-    src: files/docker-compose.yml
-    dest: /data/nexus-data/docker-compose.yml
+- name: Create Nexus Docker Volume:
+  docker_volume:
+    name: nexus_data
+
+- name: Start Nexus Docker
+  docker:
+    name: nexus_repo
+    image: sonatype/nexus3
+    state: started
+    volumes:
+      - nexus_data:/nexus-data
+    ports:
+        - '8081:8081'
