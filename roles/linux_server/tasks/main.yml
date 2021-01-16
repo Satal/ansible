@@ -68,3 +68,30 @@
     line: "{{ item.ip }} {{ item.name }}"
     state: present
   with_items: "{{ hosts }}"
+
+## Set up default firewall rules
+- name: Set up default firewall rules
+  block:
+    - name: Install firewalld
+      package:
+        name: firewalld
+        state: latest
+    
+    - name: Configure ports in firewall
+      firewalld:
+        state: "{{item.state}}"
+        port: "{{item.port}}"
+        zone: external
+        immediate: yes
+        permanent: yes
+      with_items:
+        - { state: 'enabled', port: 22/tcp } # SSH
+        - { state: 'enabled', port: 123/udp } # NTP
+    
+    - name: Ensure firewalld is running
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+        
+  when: set_firewall_confing|default(true)|bool
