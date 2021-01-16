@@ -22,3 +22,14 @@
     name: internal_repo
     state: present
     source: "{{choco_repo_location}}"
+
+- name: Install default packages
+  win_chocolatey:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - notepadplusplus
+    - git.Install
+    - putty.Install
+    - 7zip
+    - Python3
