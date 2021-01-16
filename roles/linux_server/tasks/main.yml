@@ -1,22 +1,64 @@
 ---
-- name: Ensure chrony is installed
-  package:
-    name: chrony
-    state: present
+## Connect to local repo
+- name: Set up local repository
+  block: 
+    - name: Create folder for old repo files
+      file:
+        path: /etc/yum.repos.d/old_repos
+        state: directory
 
-- name: Copy across enterprise chrony configuration
-  template:
-    src: "chrony.conf.j2"
-    dest: "/etc/chrony.conf"
-    owner: root
-    group: root
-    mode: '0644'
+    - name: Move old repo files
+      shell: mv /etc/yum.repos.d/C*.repo /etc/yum.repos.d/old_repos/ -f
+      ignore_errors: yes
 
-- name: Restart the chrony service
-  service:
-    name: chronyd
-    state: restarted
-    enabled: yes
+    - name: Configure local CentOS Repo
+      template:
+        src: local.repo.j2
+        dest: /etc/yum.repos.d/local.repo
+
+  when: set_local_repo|default(true)|bool
+
+## NTP Server
+- name: Set NTP Server
+  block:
+    - name: Ensure chrony is installed
+      package:
+        name: chrony
+        state: present
+
+    - name: Copy across enterprise chrony configuration
+      template:
+        src: "chrony.conf.j2"
+        dest: "/etc/chrony.conf"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart the chrony service
+      service:
+        name: chronyd
+        state: restarted
+        enabled: yes
+
+  when: set_ntp_server|default(true)|bool
+
+## SSH Config
+- name: SSH Config
+  block:
+    - name: Change SSHD config
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{item.line}}"
+        state: present
+        validate: "sshd -t -f %s"
+      ## Using with_items in case we wanted more changes in the future
+      with_items:
+      - regexp: "^PermitRootLogin"
+        line: "PermiteRootLogin no"
+      notify: Restart sshd
+
+  when: set_sshd_config|default(true)|bool
 
 ## Add IPs to host file
 - name: Add IPs to host file
@@ -26,19 +68,3 @@
     line: "{{ item.ip }} {{ item.name }}"
     state: present
   with_items: "{{ hosts }}"
-
-## Connect to local repo
-
-- name: Create folder for old repo files
-  file:
-    path: /etc/yum.repos.d/old_repos
-    state: directory
-
-- name: Move old repo files
-  shell: mv /etc/yum.repos.d/C*.repo /etc/yum.repos.d/old_repos/ -f
-  ignore_errors: yes
-
-- name: Configure local CentOS Repo
-  template:
-    src: local.repo.j2
-    dest: /etc/yum.repos.d/local.repo
