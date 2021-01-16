@@ -1,6 +1,6 @@
 ---
 - name: Create C:\temp
-  file:
+  win_file:
     path: C:\temp
     state: directory
 
