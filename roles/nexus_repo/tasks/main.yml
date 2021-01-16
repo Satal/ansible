@@ -7,7 +7,10 @@
 
 - name: Install docker-compose
   pip:
-    name: docker-compose
+    name: "{{item}}"
+  with_items:
+    - docker
+    - docker-compose
 
 - name: Create persistent storage
   file:
