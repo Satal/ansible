@@ -11,6 +11,8 @@
 
 - name: Run InstallChocolatey.ps1
   win_shell: C:\temp\InstallChocolatey.ps1
+  args:
+    creates: C:\ProgramData\chocolatey
 
 - name: Remove the default public source
   win_chocolatey_source:
