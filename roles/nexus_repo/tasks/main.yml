@@ -11,7 +11,7 @@
     name: nexus_data
 
 - name: Start Nexus Docker
-  docker:
+  docker_container:
     name: nexus_repo
     image: sonatype/nexus3
     state: started
