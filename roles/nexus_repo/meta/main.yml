@@ -1,3 +1,3 @@
 ---
-dependencies:
-  - role: docker_host
+# dependencies:
+#   - role: docker_host
