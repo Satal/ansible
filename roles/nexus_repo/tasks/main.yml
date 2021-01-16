@@ -6,7 +6,7 @@
     state: directory
     owner: 200
 
-- name: Create Nexus Docker Volume:
+- name: Create Nexus Docker Volume
   docker_volume:
     name: nexus_data
 
