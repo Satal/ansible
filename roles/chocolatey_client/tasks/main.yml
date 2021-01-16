@@ -1,4 +1,12 @@
 ---
+- name: Save InstallChocolatey.ps1 file
+  template:
+    src: InstallChocolatey.ps1.j2
+    dest: c:\temp\InstallChocolatey.ps1
+
+- name: Run InstallChocolatey.ps1
+  win_shell: C:\temp\InstallChocolatey.ps1
+
 - name: Remove the default public source
   win_chocolatey_source:
     name: chocolatey
