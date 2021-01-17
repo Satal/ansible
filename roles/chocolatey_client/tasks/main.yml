@@ -1,9 +1,9 @@
 ---
-- name: Install choco
-  win_chocolatey:
-    name: chocolatey
-    state: present
-    source: "{{raw_repo_location}}Install.ps1"
+# - name: Install choco
+#   win_chocolatey:
+#     name: chocolatey
+#     state: present
+#     source: "{{raw_repo_location}}Install.ps1"
 
 - name: Check if C:\ProgramData\chocolatey exists
   stat:
