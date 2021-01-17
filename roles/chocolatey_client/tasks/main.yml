@@ -49,5 +49,4 @@
     - git.Install
     - putty.Install
     - 7zip
-    - Python3
     - winscp
