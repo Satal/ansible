@@ -6,7 +6,7 @@
 #     source: "{{raw_repo_location}}Install.ps1"
 
 - name: Check if C:\ProgramData\chocolatey exists
-  stat:
+  win_stat:
     path: C:\ProgramData\chocolatey
   register: file_details
 
