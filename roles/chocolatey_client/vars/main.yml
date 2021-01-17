@@ -1,3 +1,4 @@
 ---
-choco_repo_location: http://192.168.3.10:8081/repository/chocolatey/
+raw_repo_locaiont: http://10.0.0.231:8081/repository/raw/
+choco_repo_location: http://10.0.0.231:8081/repository/chocolatey/
 choco_install_script_url: http://script/url/from/generic/tab/ChocolateyInstall.ps1
