@@ -1,14 +1,7 @@
 ---
-# - name: Install choco
-#   win_chocolatey:
-#     name: chocolatey
-#     state: present
-#     source: "{{raw_repo_location}}Install.ps1"
-
-- name: Check if C:\ProgramData\chocolatey exists
-  win_stat:
-    path: C:\ProgramData\chocolatey
-  register: file_details
+- name: Check if Chocolatey is already installed
+  win_shell: (Get-Command choco).Path
+  register: get_command_choco
 
 - name: Install Chocolatey
   block: 
@@ -26,8 +19,9 @@
       win_shell: C:\temp\InstallChocolatey.ps1
       args:
         creates: C:\ProgramData\chocolatey
-  ## When C:\ProgramData\chocolatey doesn't exist
-  when: file_details.stat.exists == false
+
+  ## When choco not installed
+  when: not get_command_choco.stderr == ""
 
 - name: Remove the default public source
   win_chocolatey_source:
