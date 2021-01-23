@@ -36,23 +36,9 @@
   stat: path=/usr/local/bin/docker-compose
   register: docker_compose
 
-- name: Download latest Docker Compose
-  get_url:
-    url: "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64"
-    dest: /usr/local/bin/docker-compose
-    tmp_dest: /tmp/
-    force: yes
-    headers:
-      Accept: "application/octet-stream"
-    mode: a+x
-  when: docker_compose.stat.exists == false
-
-- name: Create symlink for docker-compose
-  file:
-    src: /usr/local/bin/docker-compose
-    dest: /usr/bin/docker-compose
-    state: link
-  when: docker_compose.stat.exists == false
+- name: Pip install docker-compose
+  pip:
+    name: docker-compose
 
 - name: Set firewall to masquerade
   firewalld:
