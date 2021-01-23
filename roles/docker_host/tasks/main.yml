@@ -32,9 +32,10 @@
     enabled: yes
   become: yes
 
-- name: Check if Docker Compose is installed
-  stat: path=/usr/local/bin/docker-compose
-  register: docker_compose
+- name: Install pip3
+  package:
+    name: python3-pip
+    state: latest 
 
 - name: Pip install docker-compose
   pip:
