@@ -6,6 +6,7 @@
   with_items:
     - "@nginx"
     - yum-utils
+    - epel-release
 
 - name: Start nginx
   service:
