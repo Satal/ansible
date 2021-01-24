@@ -46,3 +46,10 @@ baseurl=http://{{ centos_repo.ip }}/centos/$releasever/fasttrack/
 gpgcheck=1
 enabled=0
 gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
+
+[epel]
+name=CentOS-$releasever - epel
+baseurl=http://{{ centos_repo.ip }}/centos/$releasever/epel/
+gpgcheck=1
+enabled=0
+gpgkey=http://{{ centos_repo.ip }}/centos/$releasever/RPM-GPG-KEY-CentOS-Official
