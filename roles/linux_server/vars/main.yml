@@ -27,11 +27,6 @@ hosts:
   - name: jmrepo01.mylab.local
     ip: 192.168.179.138
 
-# CentOS Local Repo
-centos_repo:
-  hostname: 'jmrepo01.mylab.local'
-  ip: 192.168.179.138
-
 # Domain 
 
 join_domain: true
