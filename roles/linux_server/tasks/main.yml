@@ -52,10 +52,13 @@
         line: "{{item.line}}"
         state: present
         validate: "sshd -t -f %s"
-      ## Using with_items in case we wanted more changes in the future
       with_items:
+      # Don't allow root login
       - regexp: "^PermitRootLogin"
         line: "PermiteRootLogin no"
+      # Don't allow login for accounts without a password
+      - regexp: "^PermitEmptyPasswords"
+        line: "PermitEmptyPasswords no"
       notify: Restart sshd
 
   when: set_sshd_config|default(true)|bool
