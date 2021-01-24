@@ -3,4 +3,5 @@
   hosts: all
   roles:
     - linux_server
+    - centos_domain_joined
   become: yes
