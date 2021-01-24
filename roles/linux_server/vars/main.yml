@@ -22,11 +22,6 @@ ntp_cron_handler_enabled: false
 
 ntp_tinker_panic: false
 
-# Hosts configuration
-hosts:
-  - name: jmrepo01.mylab.local
-    ip: 192.168.179.138
-
 # Domain 
 
 join_domain: true
