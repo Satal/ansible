@@ -63,15 +63,6 @@
 
   when: set_sshd_config|default(true)|bool
 
-## Add IPs to host file
-- name: Add IPs to host file
-  lineinfile:
-    dest: /etc/hosts
-    regexp: ".*{{ item.name }}$"
-    line: "{{ item.ip }} {{ item.name }}"
-    state: present
-  with_items: "{{ hosts }}"
-
 ## Set up default firewall rules
 - name: Set up default firewall rules
   block:
