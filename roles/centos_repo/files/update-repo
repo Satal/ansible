@@ -1,7 +1,7 @@
 #!/bin/bash
 VER='8'
 ARCH='x86_64'
-REPOS=(baseos appstream extras)
+REPOS=(baseos appstream extras epel)
 for REPO in ${REPOS[@]}
 do
     reposync -p /data/repos/centos/${VER}/ --repo=${REPO} --download-metadata --newest-only

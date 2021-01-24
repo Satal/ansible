@@ -21,6 +21,8 @@
   file:
     path: /data/repos
     state: directory
+    owner: nginx
+    recurse: yes
 
 - name: copy update-repo daily cron script
   copy:
@@ -41,6 +43,8 @@
 
 - name: Restore SELinux Context
   shell: "restorecon -Rv /data/repos"
+
+
 
 - name: Set repo hostname
   hostname:
