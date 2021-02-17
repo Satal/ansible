@@ -4,5 +4,5 @@ ARCH='x86_64'
 REPOS=(BaseOS AppStream extras epel)
 for REPO in ${REPOS[@]}
 do
-    reposync -p /data/repos/centos/${VER}/ --repo=${REPO} --download-metadata --newest-only
+    reposync --download_path=/data/repos/centos/${VER}/ --repo=${REPO} --arch=${ARCH}--download-metadata --newest-only --delete
 done
