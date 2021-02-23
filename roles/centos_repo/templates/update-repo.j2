@@ -4,5 +4,5 @@ ARCH='x86_64'
 REPOS=({% for repo in repo_repos %}{{ repo }} {% endfor %})
 for REPO in ${REPOS[@]}
 do
-    reposync --download_path={{repo_location}}/centos/${VER}/ --repo=${REPO} --arch=${ARCH}--download-metadata --newest-only --delete
+    reposync --download_path={{repo_location}}/centos/${VER}/ --repo=${REPO} --arch=${ARCH} --download-metadata --newest-only --delete
 done
