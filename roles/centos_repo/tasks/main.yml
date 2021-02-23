@@ -26,8 +26,8 @@
     recurse: yes
 
 - name: copy update-repo daily cron script
-  copy:
-    src: files/update-repo
+  template:
+    src: update-repo.j2
     dest: /etc/cron.daily/update-repo
     mode: 755
 
