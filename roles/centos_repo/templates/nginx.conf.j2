@@ -1,8 +1,20 @@
 server {
 	listen 80;
-	server_name localhost {{ repo_hostname }} {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
-        root {{repo_location}}/;
-       location / {
+	server_name {{ repo_hostname }} localhost {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
+
+{% if config_ssl|default(false)|bool %}
+        return 301 https://{{ repo_hostname }}$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        server_name {{ repo_hostname }} localhost {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
+
+        ssl_certificate /etc/nginx/ssl/{{ssl_crt_filename}};
+        ssl_certificate_key /etc/nginx/ssl/{{ssl_key_filename}};
+{% endif %}
+        location / {
+                root {{repo_location}}/;
                 autoindex on;
         }
 }

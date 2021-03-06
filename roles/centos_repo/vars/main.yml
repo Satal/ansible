@@ -7,3 +7,7 @@ repo_repos:
   - extras
   - epel
 repo_hostname: 'jmrepo01'
+
+config_ssl: true
+ssl_crt_filename: repo.crt
+ssl_key_filename: repo.key
