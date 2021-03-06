@@ -1,9 +1,9 @@
 ---
 
-repo_location: /data/repos
+repo_location: /repo/repos
 repo_repos:
-  - BaseOS
-  - AppStream
+  - baseos
+  - appstream
   - extras
   - epel
 repo_hostname: 'jmrepo01'

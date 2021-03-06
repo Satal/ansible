@@ -20,7 +20,7 @@
 
 - name: create repo directory
   file:
-    path: /data/repos
+    path: "{{repo_location}}"
     state: directory
     owner: nginx
     recurse: yes
@@ -38,12 +38,12 @@
   notify:
     - restart nginx
 
-- name: permissions for /data/repos
-  shell: "semanage fcontext -a -t httpd_sys_content_t '/data/repos(/.*)?'"
+- name: permissions for the repo location
+  shell: "semanage fcontext -a -t httpd_sys_content_t '{{repo_location}}(/.*)?'"
   ignore_errors: yes
 
 - name: Restore SELinux Context
-  shell: "restorecon -Rv /data/repos"
+  shell: "restorecon -Rv {{repo_location}}"
 
 
 

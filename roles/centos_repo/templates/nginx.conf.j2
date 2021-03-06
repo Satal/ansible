@@ -1,7 +1,7 @@
 server {
 	listen 80;
 	server_name localhost {{ repo_hostname }} {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }};
-        root /data/repos/;
+        root {{repo_location}}/;
        location / {
                 autoindex on;
         }
