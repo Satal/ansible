@@ -2,4 +2,10 @@
 - hosts: all
   become: true
   roles:
-    - centos_repo
+    - role: centos_repo
+      ssl_crt:
+        filename: repo.crt
+        src: files/repo.crt
+      ssl_key:
+        filename: repo.key
+        src: files/repo.key

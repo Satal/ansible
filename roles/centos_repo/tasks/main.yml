@@ -18,13 +18,15 @@
         owner: nginx
         mode: 700
 
-    - name: Copy certificate files
+    - name: Copy crt file
       copy:
-        src: "{{item}}"
-        dest: "/etc/nginx/ssl/{{item}}"
-      with_items:
-        - repo.crt
-        - repo.key
+        src: "{{ssl_crt.src}}"
+        dest: "/etc/nginx/ssl/{{ssl_crt.filename}}"
+    
+    - name: Copy key file
+      copy:
+        src: "{{ssl_key.src}}"
+        dest: "/etc/nginx/ssl/{{ssl_key.filename}}"
 
   when: config_ssl|default(false)|bool
 
