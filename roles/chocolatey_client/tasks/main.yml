@@ -4,7 +4,7 @@
   register: get_command_choco
 
 - name: Install Chocolatey
-  block: 
+  block:
     - name: Create C:\temp
       win_file:
         path: C:\temp

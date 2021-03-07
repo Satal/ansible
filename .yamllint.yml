@@ -2,7 +2,9 @@
 extends: default
 
 rules:
-  new-lines: disable # Because I'm on Windows
+  # Because I'm on Windows
+  new-lines: disable
   line-length:
     max: 200
     level: warning
+  truthy: disable

@@ -1,4 +1,4 @@
---- 
+---
 - name: Install realmd packages
   yum:
     name: "{{ item }}"
@@ -23,7 +23,6 @@
   command: /bin/bash -c "/usr/sbin/realm list"
   register: realm_list_results
 
-
 - name: Join domain if necessary
   block:
     - name: Join the domain
@@ -33,16 +32,16 @@
         - Restart sssd
 
     - name: Fail the play when the realm join fails
-      fail: 
+      fail:
         msg: "Realm join failed with this error: {{ command_result.stderr }}"
       when: "'Already joined to this domain' not in command_result.stderr and command_result.rc != 0"
   
   when: realm_list_results.stdout == ""
 
 - name: Don't require users to provide fully qualified names
-  lineinfile: 
-    path: /etc/sssd/sssd.conf 
-    regexp: '^(.*)use_fully_qualified_names = True(.*)$' 
+  lineinfile:
+    path: /etc/sssd/sssd.conf
+    regexp: '^(.*)use_fully_qualified_names = True(.*)$'
     line: 'use_fully_qualified_names = False'
     backrefs: yes
   notify:

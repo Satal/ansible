@@ -9,7 +9,7 @@
     - epel-release
 
 - name: Set up SSL for nginx
-  block: 
+  block:
 
     - name: Create nginx ssl directory
       file:

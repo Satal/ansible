@@ -1,16 +1,16 @@
 ---
-- name: Change the hostname 
+- name: Change the hostname
   win_hostname:
     name: '{{ dc_hostname }}'
   register: res
 
 - name: Set static IP address
   win_shell: "(new-netipaddress -InterfaceAlias Ethernet0 -IPAddress {{ dc_address }} -prefixlength {{dc_netmask_cidr}} -defaultgateway {{ dc_gateway }})"
-  ignore_errors: True 
+  ignore_errors: true
 
 - name: Reboot
   win_reboot:
-  when: res.reboot_required   
+  when: res.reboot_required
 
 - name: Stop the time service
   win_service:
@@ -29,9 +29,9 @@
   win_firewall:
     state: disabled
     profiles:
-    - Domain
-    - Private
-    - Public
+      - Domain
+      - Private
+      - Public
   tags: disable_firewall
 
 - name: install ad
@@ -64,13 +64,13 @@
   win_dns_client:
     adapter_names: '*'
     ipv4_addresses:
-    - '127.0.0.1'
+      - '127.0.0.1'
 
 - name: Create reverse DNS zone
-  win_shell: "Add-DnsServerPrimaryZone -NetworkID {{reverse_dns_zone}} -ReplicationScope Forest"   
+  win_shell: "Add-DnsServerPrimaryZone -NetworkID {{reverse_dns_zone}} -ReplicationScope Forest"
   retries: 30
   delay: 60
-  register: result           
+  register: result
   until: result is succeeded
 
 - name: Check for xRemoteDesktopAdmin Powershell module

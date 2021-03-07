@@ -1,7 +1,7 @@
 ---
 ## Connect to local repo
 - name: Set up local repository
-  block: 
+  block:
     - name: Create folder for old repo files
       file:
         path: /etc/yum.repos.d/old_repos
@@ -53,12 +53,12 @@
         state: present
         validate: "sshd -t -f %s"
       with_items:
-      # Don't allow root login
-      - regexp: "^PermitRootLogin"
-        line: "PermitRootLogin no"
-      # Don't allow login for accounts without a password
-      - regexp: "^PermitEmptyPasswords"
-        line: "PermitEmptyPasswords no"
+        # Don't allow root login
+        - regexp: "^PermitRootLogin"
+          line: "PermitRootLogin no"
+        # Don't allow login for accounts without a password
+        - regexp: "^PermitEmptyPasswords"
+          line: "PermitEmptyPasswords no"
       notify: Restart sshd
 
   when: set_sshd_config|default(true)|bool
@@ -70,7 +70,7 @@
       package:
         name: firewalld
         state: latest
-    
+      
     - name: Configure ports in firewall
       firewalld:
         state: "{{item.state}}"
@@ -79,13 +79,17 @@
         immediate: yes
         permanent: yes
       with_items:
-        - { state: 'enabled', port: 22/tcp } # SSH
-        - { state: 'enabled', port: 123/udp } # NTP
-    
+        # SSH
+        - state: 'enabled'
+          port: 22/tcp
+        # NTP
+        - state: 'enabled'
+          port: 123/udp
+      
     - name: Ensure firewalld is running
       service:
         name: firewalld
         state: started
         enabled: yes
-        
+    
   when: set_firewall_confing|default(true)|bool
