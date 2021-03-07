@@ -3,6 +3,7 @@
   become: true
   roles:
     - role: centos_repo
+      config_ssl: false
       ssl_crt:
         filename: repo.crt
         src: files/repo.crt
